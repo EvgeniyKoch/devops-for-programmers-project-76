@@ -1,0 +1,2 @@
+ansible_ssh_user: root
+private_key_file: /Users/parovoz/.ssh/parovoz

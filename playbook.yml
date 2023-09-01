@@ -1,0 +1,36 @@
+---
+
+- hosts: webservers
+  gather_facts: no
+  roles:
+    - role: geerlingguy.pip
+
+    - role: datadog.datadog
+      become: yes
+      vars:
+        datadog_api_key: "4b2b4c6bcae86a73c71dfd45bbebccc4b1d28491"
+        datadog_site: "datadoghq.com"
+        datadog_checks:
+          http_check:
+            init_config:
+            instances:
+              - name: MyApp HTTP Check
+                url: http://localhost:8080
+                timeout: 5
+                method: GET
+
+  tasks:
+    - community.docker.docker_container:
+        name: app
+        image: redmine
+        restart_policy: always
+        state: started
+        ports:
+          - 8080:3000
+        env:
+          REDMINE_DB_DATABASE: "{{ database }}"
+          REDMINE_DB_POSTGRES: "{{ host }}"
+          REDMINE_DB_PORT: "{{ port | string }}"
+          REDMINE_DB_USERNAME: "{{ username }}"
+          REDMINE_DB_PASSWORD: "{{ password }}"
+
