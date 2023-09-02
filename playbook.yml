@@ -21,7 +21,8 @@
                 method: GET
 
   tasks:
-    - community.docker.docker_container:
+    - name: Start Docker Container
+      community.docker.docker_container:
         name: app
         image: redmine
         restart_policy: always
