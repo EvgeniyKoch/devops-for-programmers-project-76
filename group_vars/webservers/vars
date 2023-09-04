@@ -1,0 +1,8 @@
+ansible_ssh_user: root
+private_key_file: /Users/parovoz/.ssh/parovoz
+redmine_db_host: "{{ vault_redmine_db_host }}"
+redmine_db_database: "{{ vault_redmine_db_database }}"
+redmine_db_username: "{{ vault_redmine_db_username }}"
+redmine_db_password: "{{ vault_redmine_db_password }}"
+redmine_db_port: "{{ vault_redmine_db_port }}"
+datadog_key: "{{ vault_datadog_api_key }}"
